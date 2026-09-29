@@ -32,12 +32,21 @@ button[disabled]{opacity:.6;cursor:wait}
 .msg{min-height:20px;margin-top:12px;font-size:14px;color:var(--err)}
 .fine{margin-top:18px;font-size:12px;color:var(--mute);line-height:1.5}
 footer{padding:18px 28px;color:var(--mute);font-size:12px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
-@media (max-width:820px){main{grid-template-columns:1fr;gap:28px;padding:16px 16px 36px}header,footer{padding-left:16px;padding-right:16px}ul.pts{display:none}}
+.brand{border-top:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.02),transparent)}
+.brand-in{max-width:1120px;margin:0 auto;padding:40px 28px;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center}
+.ss{font-family:Montserrat;font-weight:900;font-size:clamp(44px,7vw,84px);letter-spacing:.14em;line-height:1}
+.ser{font-family:Montserrat;font-weight:800;color:var(--y);letter-spacing:.14em;font-size:clamp(15px,2vw,22px);margin-top:10px}
+.rule{width:90px;height:3px;background:var(--y);margin:22px 0}
+.dx{font-family:Montserrat;font-weight:800;color:var(--y);letter-spacing:.14em;font-size:14px}
+.bw{color:var(--mute);letter-spacing:.2em;font-size:13px;margin-top:8px}
+#fk{width:100%;height:340px;display:block}
+@media (max-width:820px){.brand-in{grid-template-columns:1fr;padding:28px 16px}#fk{height:260px}
+main{grid-template-columns:1fr;gap:28px;padding:16px 16px 36px}header,footer{padding-left:16px;padding-right:16px}ul.pts{display:none}}
 </style>
 </head>
 <body>
 <div class="stripe"></div>
-<header><span><b>7DX</b> &nbsp;·&nbsp; SIMSEQ SAFETY SIMULATION SERIES</span><span>PRIVATE PREVIEW</span></header>
+<header><span><b>7DX</b> &nbsp;·&nbsp; SIMSEQ SAFETY SIMULATION SERIES</span><span>ASSIGNED REVIEW DOCUMENT</span></header>
 <main>
   <section>
     <div class="eyebrow">SIMSEQ</div>
@@ -61,9 +70,21 @@ footer{padding:18px 28px;color:var(--mute);font-size:12px;border-top:1px solid v
     <div class="fine">Confidential. Please don't share the link or password outside your team.</div>
   </section>
 </main>
+<section class="brand">
+  <div class="brand-in">
+    <div class="brand-txt">
+      <div class="ss">SIMSEQ</div>
+      <div class="ser">SAFETY SIMULATION SERIES</div>
+      <div class="rule"></div>
+      <div class="dx">7DX FUTURE SYSTEMS STUDIO</div>
+      <div class="bw">BUILD WHAT THE FUTURE NEEDS</div>
+    </div>
+    <canvas id="fk" aria-label="Rotating forklift"></canvas>
+  </div>
+</section>
 <footer><span>© 2026 7DX</span><span>julian.ward@7dx.co</span></footer>
 <script>
-const SALT="WgypJjCXoSSjN2jn/axJcw==",IV="kM5Td6ewLlwiavLe",ITER=310000;
+const SALT="erPFUkvJ34NVxKVSapCYpA==",IV="QBgWflIHGv9sJLp1",ITER=310000;
 const b64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
 async function open(pw){
   const base=await crypto.subtle.importKey("raw",new TextEncoder().encode(pw),"PBKDF2",false,["deriveKey"]);
@@ -81,6 +102,61 @@ async function go(pw,quiet){
 }
 document.getElementById("f").addEventListener("submit",e=>{e.preventDefault();go(document.getElementById("pw").value)});
 try{const k=sessionStorage.getItem("k");if(k)go(k,true)}catch(e){}
+</script>
+<script type="module">
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js";
+const cv=document.getElementById("fk");
+const r=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true});
+r.setPixelRatio(Math.min(devicePixelRatio,2));
+const sc=new THREE.Scene(),cam=new THREE.PerspectiveCamera(32,1,.1,100);
+cam.position.set(5.2,3.2,5.2);cam.lookAt(0,1.1,0);
+sc.add(new THREE.HemisphereLight(0xdfe8ff,0x1a1f2a,1.1));
+const sun=new THREE.DirectionalLight(0xffffff,2.2);sun.position.set(4,7,3);sc.add(sun);
+const rim=new THREE.DirectionalLight(0xf5b400,1.2);rim.position.set(-5,3,-4);sc.add(rim);
+const M=(c,m=.25,ro=.55)=>new THREE.MeshStandardMaterial({color:c,metalness:m,roughness:ro});
+const Y=M(0xf29a0e,.2,.45),K=M(0x2b2f36,.4,.5),S=M(0x9aa3ad,.8,.3),T=M(0x111214,0,.9),G=M(0x3a3f47,.3,.6);
+const g=new THREE.Group();sc.add(g);
+const box=(w,h,d,m,x,y,z)=>{const o=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m);o.position.set(x,y,z);g.add(o);return o};
+const cyl=(rad,len,m,x,y,z,ax="z")=>{const o=new THREE.Mesh(new THREE.CylinderGeometry(rad,rad,len,28),m);
+  if(ax==="z")o.rotation.x=Math.PI/2;if(ax==="x")o.rotation.z=Math.PI/2;o.position.set(x,y,z);g.add(o);return o};
+// body, counterweight, hood, seat
+box(1.9,.55,1.1,Y,-.1,.55,0);
+box(.55,.9,1.14,K,-1.0,.78,0);
+box(1.0,.35,1.0,Y,-.45,1.0,0);
+box(.45,.12,.5,G,-.35,1.24,0);box(.1,.5,.5,G,-.6,1.45,0);
+// overhead guard
+for(const[x,z]of[[.35,.5],[.35,-.5],[-.85,.5],[-.85,-.5]])box(.07,1.35,.07,K,x,1.72,z);
+box(1.35,.07,1.1,K,-.25,2.4,0);
+for(let i=-2;i<=2;i++)box(1.3,.03,.04,K,-.25,2.37,i*.2);
+// steering wheel + LPG bottle
+const sw=new THREE.Mesh(new THREE.TorusGeometry(.17,.025,10,28),K);sw.position.set(.15,1.45,0);sw.rotation.y=Math.PI/2;sw.rotation.x=.5;g.add(sw);
+cyl(.14,.7,S,-1.05,1.5,0,"z");
+// wheels
+for(const[x,z,rw]of[[.55,.52,.3],[.55,-.52,.3],[-.85,.5,.24],[-.85,-.5,.24]]){cyl(rw,.26,T,x,rw,z,"z");cyl(rw*.55,.28,S,x,rw,z,"z")}
+// mast (lifts), carriage, forks
+const mast=new THREE.Group();g.add(mast);
+const mb=(w,h,d,m,x,y,z)=>{const o=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m);o.position.set(x,y,z);mast.add(o);return o};
+mb(.1,2.5,.1,K,.95,1.3,.35);mb(.1,2.5,.1,K,.95,1.3,-.35);mb(.1,.1,.8,K,.95,2.5,0);
+const car=new THREE.Group();mast.add(car);
+const cb=(w,h,d,m,x,y,z)=>{const o=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m);o.position.set(x,y,z);car.add(o)};
+cb(.08,.5,.95,G,1.05,.45,0);cb(.9,.05,.12,S,1.5,.22,.28);cb(.9,.05,.12,S,1.5,.22,-.28);cb(.05,.45,.12,S,1.07,.42,.28);cb(.05,.45,.12,S,1.07,.42,-.28);
+// pallet + load
+const pl=new THREE.Group();pl.position.y=.12;car.add(pl);
+const pb=(w,h,d,m,x,y,z)=>{const o=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m);o.position.set(x,y,z);pl.add(o)};
+const W=M(0xb08850,0,.8),L=M(0xc7b28a,0,.9);
+pb(.95,.04,.95,W,1.55,.28,0);pb(.95,.04,.95,W,1.55,.14,0);
+pb(.85,.55,.85,L,1.55,.58,0);
+// floor disc + shadow-ish
+const fl=new THREE.Mesh(new THREE.CircleGeometry(2.6,64),new THREE.MeshStandardMaterial({color:0x1b2230,roughness:1}));fl.rotation.x=-Math.PI/2;sc.add(fl);
+const ring=new THREE.Mesh(new THREE.RingGeometry(2.45,2.55,64),new THREE.MeshBasicMaterial({color:0xf5b400,transparent:true,opacity:.6}));ring.rotation.x=-Math.PI/2;ring.position.y=.005;sc.add(ring);
+g.position.x=-.25;
+function size(){const w=cv.clientWidth,h=cv.clientHeight;r.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()}
+addEventListener("resize",size);size();
+const still=matchMedia("(prefers-reduced-motion: reduce)").matches;
+let t0=performance.now();
+(function loop(t){const s=(t-t0)/1000;
+  if(!still){g.rotation.y=s*.45;car.position.y=(Math.sin(s*.9)*.5+.5)*.9}
+  r.render(sc,cam);requestAnimationFrame(loop)})(t0);
 </script>
 </body>
 </html>
