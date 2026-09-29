@@ -127,10 +127,10 @@ const ITER=310000;
 // Fallback for pages served without HTTPS (browsers hide crypto.subtle there): the same AES-GCM / PBKDF2 in JS.
 function loadForge(){return new Promise((ok,no)=>{if(window.forge)return ok();const t=document.createElement("script");
   t.src="https://cdn.jsdelivr.net/npm/node-forge@1.3.1/dist/forge.min.js";t.onload=()=>ok();t.onerror=no;document.head.appendChild(t)})}
-async function openSlow(pw,salt,iv,ct){await loadForge();const f=window.forge,bs=a=>f.util.binary.raw.encode(a);
+async function openSlow(pw,salt,iv,ct){await loadForge();const f=window.forge,bs=a=>{let o="";for(let i=0;i<a.length;i+=32768)o+=String.fromCharCode.apply(null,a.subarray(i,i+32768));return o};
   const key=f.pkcs5.pbkdf2(f.util.encodeUtf8(pw),bs(salt),ITER,32,f.md.sha256.create());
   const d=f.cipher.createDecipher("AES-GCM",key);d.start({iv:bs(iv),tagLength:128,tag:f.util.createBuffer(bs(ct.slice(ct.length-16)))});
-  d.update(f.util.createBuffer(bs(ct.slice(0,ct.length-16))));if(!d.finish())throw new Error("bad");return f.util.decodeUtf8(d.output.getBytes())}
+  d.update(f.util.createBuffer(bs(ct.slice(0,ct.length-16))));if(!d.finish())throw new Error("bad");const r=d.output.getBytes(),u=new Uint8Array(r.length);for(let i=0;i<r.length;i++)u[i]=r.charCodeAt(i);return new TextDecoder().decode(u)}
 async function open(pw){
   const buf=new Uint8Array(await (await fetch("deck.bin?t="+Date.now(),{cache:"no-store"})).arrayBuffer());
   const salt=buf.slice(0,16),iv=buf.slice(16,28),ct=buf.slice(28);
