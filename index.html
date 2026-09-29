@@ -66,6 +66,9 @@ footer{padding:12px 28px}
 .tc-tag{background:linear-gradient(100deg,#A9B0B8 0%,#A9B0B8 40%,#fff6d8 50%,#A9B0B8 60%,#A9B0B8 100%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:glint 6s ease-in-out infinite}
 @keyframes glint{0%{background-position:100% 0}45%,100%{background-position:0 0}}
 @media (prefers-reduced-motion:reduce){.tc-tag{animation:none}}
+footer{display:grid;grid-template-columns:1fr auto 1fr;align-items:center}footer span:last-child{justify-self:end}
+.cic{font-family:Montserrat;font-weight:700;letter-spacing:.22em;color:#FFC72C;font-size:11px;text-align:center}
+@media (max-width:600px){footer{grid-template-columns:1fr;justify-items:center;text-align:center}footer span:last-child{justify-self:center}}
 </style>
 </head>
 <body>
@@ -99,9 +102,9 @@ footer{padding:12px 28px}
   </div>
   </div>
 </section>
-<footer><span>© 2026 7DX</span><span>julian.ward@7dx.co</span></footer>
+<footer><span>© 2026 7DX</span><span class="cic">COMMERCIAL IN CONFIDENCE</span><span>julian.ward@7dx.co</span></footer>
 <script>
-const SALT="XjvQlA+uxRsxW1D6ERUh7A==",IV="0KkItIdc8pQVD2bw",ITER=310000;
+const SALT="Cscgx5WuS9lfJHqk3NFudw==",IV="pIG5czhKFYIx+5uf",ITER=310000;
 const b64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
 async function open(pw){
   const base=await crypto.subtle.importKey("raw",new TextEncoder().encode(pw),"PBKDF2",false,["deriveKey"]);
