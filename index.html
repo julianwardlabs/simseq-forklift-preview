@@ -45,6 +45,21 @@ footer{padding:18px 28px;color:var(--mute);font-size:12px;border-top:1px solid v
 .tc-studio{font-weight:700;color:#FFC72C;letter-spacing:.4em;margin-right:-.4em;font-size:clamp(11px,1.7vw,19px);margin-top:36px}
 .tc-tag{font-weight:500;color:#A9B0B8;letter-spacing:.4em;margin-right:-.4em;font-size:clamp(10px,1.4vw,15px);margin-top:16px}
 @media (max-width:820px){main{grid-template-columns:1fr;gap:28px;padding:16px 16px 36px}header,footer{padding-left:16px;padding-right:16px}ul.pts{display:none}}
+/* fit one laptop screen (1366x768 and up): two columns, no scroll */
+body{height:100vh;overflow:hidden}
+.brand{display:flex;align-items:center;min-height:0}
+.tc{flex-direction:row;justify-content:center;gap:56px;padding:12px 28px;width:100%}
+.tc-left{display:flex;flex-direction:column;align-items:center;flex:0 1 620px}
+.tc-right{flex:0 1 420px;display:flex;flex-direction:column;align-items:stretch;text-align:left}
+.tc-simseq{font-size:clamp(40px,7.5vh,76px)}
+.tc-rule{margin-top:2.2vh}.tc-series{margin-top:1.8vh;font-size:clamp(11px,1.9vh,16px)}
+.tc-fork{font-size:clamp(26px,5.2vh,50px);margin-top:3.6vh}
+.tc-img{width:auto;max-width:100%;height:clamp(180px,33vh,360px);margin-top:1.4vh}
+.tc-rule2{margin-top:1vh}.tc-studio{margin-top:2.4vh;font-size:clamp(10px,1.7vh,15px)}.tc-tag{margin-top:1.2vh;font-size:clamp(9px,1.4vh,13px)}
+.tc-lead{margin:0 0 20px;font-size:17px}
+.tc .card{width:100%;margin:0}
+footer{padding:12px 28px}
+@media (max-width:900px),(max-height:620px){body{height:auto;overflow:auto}.tc{flex-direction:column;align-items:center;gap:28px;padding:32px 16px}.tc-right{width:min(440px,100%)}.tc-lead{text-align:center}}
 </style>
 </head>
 <body>
@@ -52,11 +67,17 @@ footer{padding:18px 28px;color:var(--mute);font-size:12px;border-top:1px solid v
 <header><span><b>7DX</b></span><span>ASSIGNED REVIEW DOCUMENT</span></header>
 <section class="brand">
   <div class="tc">
+  <div class="tc-left">
     <div class="tc-simseq">SIMSEQ</div>
     <div class="tc-rule"></div>
     <div class="tc-series">SAFETY SIMULATION SERIES</div>
     <div class="tc-fork">FORKLIFT SAFETY</div>
     <img class="tc-img" src="forklift.webp" alt="Forklift turning on a turntable" width="736" height="416">
+    <div class="tc-rule2"></div>
+    <div class="tc-studio">7DX FUTURE SYSTEMS STUDIO</div>
+    <div class="tc-tag">BUILD WHAT THE FUTURE NEEDS</div>
+  </div>
+  <div class="tc-right">
     <p class="tc-lead">Practise the moments that matter on a busy yard, in VR or on a desktop. See the modules, how they teach, and build your own package and price.</p>
     <section class="card">
     <h2>Sign in</h2>
@@ -69,14 +90,12 @@ footer{padding:18px 28px;color:var(--mute);font-size:12px;border-top:1px solid v
     </form>
     <div class="fine">Confidential. Please don't share the link or password outside your team.</div>
   </section>
-    <div class="tc-rule2"></div>
-    <div class="tc-studio">7DX FUTURE SYSTEMS STUDIO</div>
-    <div class="tc-tag">BUILD WHAT THE FUTURE NEEDS</div>
+  </div>
   </div>
 </section>
 <footer><span>© 2026 7DX</span><span>julian.ward@7dx.co</span></footer>
 <script>
-const SALT="mdwf2wZ8/1s7h/GcwgzKJw==",IV="eHCs4xdX52VtlvRJ",ITER=310000;
+const SALT="uoQQnc+/KmVLGregS/tfdg==",IV="mkk6w5WJp5KZIJic",ITER=310000;
 const b64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
 async function open(pw){
   const base=await crypto.subtle.importKey("raw",new TextEncoder().encode(pw),"PBKDF2",false,["deriveKey"]);
