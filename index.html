@@ -63,7 +63,7 @@ footer{padding:12px 28px}
 .tc-series{display:flex;align-items:center;justify-content:center;gap:.9em}
 .tc-icons{display:inline-flex;gap:.7em;letter-spacing:0}
 .pi{height:.72em;width:auto;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round;overflow:visible}
-.tc-tag{background:linear-gradient(100deg,#868f9a 0%,#868f9a 34%,#f3cf6a 43%,#fff8e6 50%,#f3cf6a 57%,#868f9a 66%,#868f9a 100%);background-size:270% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:glint 4s ease-in-out infinite;filter:drop-shadow(0 0 6px rgba(255,199,44,.38))}
+.tc-tag{background:linear-gradient(100deg,#868f9a 0%,#868f9a 34%,#d6e2ef 43%,#ffffff 50%,#d6e2ef 57%,#868f9a 66%,#868f9a 100%);background-size:270% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:glint 4s ease-in-out infinite;filter:drop-shadow(0 0 6px rgba(220,235,255,.35))}
 @keyframes glint{0%{background-position:100% 0}58%,100%{background-position:0 0}}
 @media (prefers-reduced-motion:reduce){.tc-tag{animation:none}}
 footer{display:grid;grid-template-columns:1fr auto 1fr;align-items:center}footer span:last-child{justify-self:end}
@@ -105,7 +105,7 @@ footer{display:grid;grid-template-columns:1fr auto 1fr;align-items:center}footer
 </section>
 <footer><span>© 2026 7DX</span><span class="cic">COMMERCIAL IN CONFIDENCE</span><span>julian.ward@7dx.co</span></footer>
 <script>
-const SALT="Q4ElJaH9R5ZaJyiJqtms8g==",IV="fpkhkipzEqLfMEsi",ITER=310000;
+const SALT="YPgPfzCYY9/VRPN4AcT1Mg==",IV="PbwTCgiQ3F8Kv7i/",ITER=310000;
 const b64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
 async function open(pw){
   const base=await crypto.subtle.importKey("raw",new TextEncoder().encode(pw),"PBKDF2",false,["deriveKey"]);
