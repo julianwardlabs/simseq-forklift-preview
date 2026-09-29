@@ -32,13 +32,15 @@ button[disabled]{opacity:.6;cursor:wait}
 .msg{min-height:20px;margin-top:12px;font-size:14px;color:var(--err)}
 .fine{margin-top:18px;font-size:12px;color:var(--mute);line-height:1.5}
 footer{padding:18px 28px;color:var(--mute);font-size:12px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
-.brand{background:#000;border-top:1px solid var(--line)}
-.tc{max-width:1120px;margin:0 auto;padding:64px 16px 56px;display:flex;flex-direction:column;align-items:center;text-align:center;color:#F4F1EA;font-family:Montserrat}
+.brand{background:#000;flex:1}
+.tc{max-width:1120px;margin:0 auto;padding:48px 16px 56px;display:flex;flex-direction:column;align-items:center;text-align:center;color:#F4F1EA;font-family:Montserrat}
 .tc-simseq{font-weight:800;font-size:clamp(46px,9vw,110px);letter-spacing:.2em;margin-right:-.2em;line-height:1}
 .tc-rule{width:120px;height:3px;border-radius:2px;background:#FFC72C;margin-top:30px}
 .tc-series{font-weight:700;color:#FFC72C;letter-spacing:.45em;margin-right:-.45em;font-size:clamp(12px,1.8vw,20px);margin-top:24px}
 .tc-fork{font-weight:800;font-size:clamp(30px,6vw,72px);letter-spacing:.14em;margin-right:-.14em;margin-top:56px;line-height:1}
 .tc-img{width:min(736px,100%);height:auto;margin-top:22px}
+.tc-lead{font-family:Inter,system-ui,sans-serif;color:#b8c0ca;font-size:18px;line-height:1.55;max-width:34em;margin:26px 0 30px}
+.tc .card{width:min(440px,100%);text-align:left;margin-bottom:26px}
 .tc-rule2{width:84px;height:2px;background:rgba(255,199,44,.8);margin-top:18px}
 .tc-studio{font-weight:700;color:#FFC72C;letter-spacing:.4em;margin-right:-.4em;font-size:clamp(11px,1.7vw,19px);margin-top:36px}
 .tc-tag{font-weight:500;color:#A9B0B8;letter-spacing:.4em;margin-right:-.4em;font-size:clamp(10px,1.4vw,15px);margin-top:16px}
@@ -47,19 +49,16 @@ footer{padding:18px 28px;color:var(--mute);font-size:12px;border-top:1px solid v
 </head>
 <body>
 <div class="stripe"></div>
-<header><span><b>7DX</b> &nbsp;·&nbsp; SIMSEQ SAFETY SIMULATION SERIES</span><span>ASSIGNED REVIEW DOCUMENT</span></header>
-<main>
-  <section>
-    <div class="eyebrow">SIMSEQ</div>
-    <h1>Forklift Safety Simulation</h1>
-    <p class="lead">Practise the moments that matter on a busy yard, in VR or on a desktop. See the modules, how they teach, and build your own package and price.</p>
-    <ul class="pts">
-      <li>Modules for operators and people working around forklifts</li>
-      <li>VR headset and desktop</li>
-      <li>Interactive price configurator</li>
-    </ul>
-  </section>
-  <section class="card">
+<header><span><b>7DX</b></span><span>ASSIGNED REVIEW DOCUMENT</span></header>
+<section class="brand">
+  <div class="tc">
+    <div class="tc-simseq">SIMSEQ</div>
+    <div class="tc-rule"></div>
+    <div class="tc-series">SAFETY SIMULATION SERIES</div>
+    <div class="tc-fork">FORKLIFT SAFETY</div>
+    <img class="tc-img" src="forklift.webp" alt="Forklift turning on a turntable" width="736" height="416">
+    <p class="tc-lead">Practise the moments that matter on a busy yard, in VR or on a desktop. See the modules, how they teach, and build your own package and price.</p>
+    <section class="card">
     <h2>Sign in</h2>
     <p class="sub">This presentation is private. Enter the password you were given.</p>
     <form id="f" autocomplete="off">
@@ -70,14 +69,6 @@ footer{padding:18px 28px;color:var(--mute);font-size:12px;border-top:1px solid v
     </form>
     <div class="fine">Confidential. Please don't share the link or password outside your team.</div>
   </section>
-</main>
-<section class="brand">
-  <div class="tc">
-    <div class="tc-simseq">SIMSEQ</div>
-    <div class="tc-rule"></div>
-    <div class="tc-series">SAFETY SIMULATION SERIES</div>
-    <div class="tc-fork">FORKLIFT SAFETY</div>
-    <img class="tc-img" src="forklift.webp" alt="Forklift turning on a turntable" width="736" height="416">
     <div class="tc-rule2"></div>
     <div class="tc-studio">7DX FUTURE SYSTEMS STUDIO</div>
     <div class="tc-tag">BUILD WHAT THE FUTURE NEEDS</div>
@@ -85,7 +76,7 @@ footer{padding:18px 28px;color:var(--mute);font-size:12px;border-top:1px solid v
 </section>
 <footer><span>© 2026 7DX</span><span>julian.ward@7dx.co</span></footer>
 <script>
-const SALT="VGFb0TwBaGXSeGiBNFD/aQ==",IV="eZ8kG2xqW34Zjs5c",ITER=310000;
+const SALT="mdwf2wZ8/1s7h/GcwgzKJw==",IV="eHCs4xdX52VtlvRJ",ITER=310000;
 const b64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
 async function open(pw){
   const base=await crypto.subtle.importKey("raw",new TextEncoder().encode(pw),"PBKDF2",false,["deriveKey"]);
