@@ -60,6 +60,12 @@ body{height:100vh;overflow:hidden}
 .tc .card{width:100%;margin:0}
 footer{padding:12px 28px}
 @media (max-width:900px),(max-height:620px){body{height:auto;overflow:auto}.tc{flex-direction:column;align-items:center;gap:28px;padding:32px 16px}.tc-right{width:min(440px,100%)}.tc-lead{text-align:center}}
+.tc-series{display:flex;align-items:center;justify-content:center;gap:.9em}
+.tc-icons{display:inline-flex;gap:.7em;letter-spacing:0}
+.pi{height:1.5em;width:auto;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round;overflow:visible}
+.tc-tag{background:linear-gradient(100deg,#A9B0B8 0%,#A9B0B8 40%,#fff6d8 50%,#A9B0B8 60%,#A9B0B8 100%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:glint 6s ease-in-out infinite}
+@keyframes glint{0%{background-position:100% 0}45%,100%{background-position:0 0}}
+@media (prefers-reduced-motion:reduce){.tc-tag{animation:none}}
 </style>
 </head>
 <body>
@@ -70,7 +76,7 @@ footer{padding:12px 28px}
   <div class="tc-left">
     <div class="tc-simseq">SIMSEQ</div>
     <div class="tc-rule"></div>
-    <div class="tc-series">SAFETY SIMULATION SERIES</div>
+    <div class="tc-series"><span>SAFETY SIMULATION SERIES</span><span class="tc-icons"><svg class="pi" viewBox="0 0 66 40" role="img" aria-label="VR headset"><title>VR headset</title><path d="M10 3H56A8 8 0 0 1 64 11V29A8 8 0 0 1 56 37H42.5L38.5 30.5A6.4 6.4 0 0 0 27.5 30.5L23.5 37H10A8 8 0 0 1 2 29V11A8 8 0 0 1 10 3Z"/><rect x="11" y="11" width="5" height="11" rx="2.5"/><rect x="30.5" y="9" width="5" height="11" rx="2.5"/><rect x="50" y="11" width="5" height="11" rx="2.5"/></svg><svg class="pi" viewBox="0 0 56 40" role="img" aria-label="Desktop"><title>Desktop</title><rect x="2" y="2" width="52" height="29" rx="3"/><path d="M24 31L22.5 38M32 31L33.5 38M17 38H39"/></svg></span></div>
     <div class="tc-fork">FORKLIFT SAFETY</div>
     <img class="tc-img" src="forklift.webp" alt="Forklift turning on a turntable" width="736" height="416">
     <div class="tc-rule2"></div>
@@ -95,7 +101,7 @@ footer{padding:12px 28px}
 </section>
 <footer><span>© 2026 7DX</span><span>julian.ward@7dx.co</span></footer>
 <script>
-const SALT="uoQQnc+/KmVLGregS/tfdg==",IV="mkk6w5WJp5KZIJic",ITER=310000;
+const SALT="n3snC/drdI9nRkFYoD2xwQ==",IV="q8BWdMKbWBpdwRIj",ITER=310000;
 const b64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
 async function open(pw){
   const base=await crypto.subtle.importKey("raw",new TextEncoder().encode(pw),"PBKDF2",false,["deriveKey"]);
