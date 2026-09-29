@@ -105,7 +105,7 @@ footer{display:grid;grid-template-columns:1fr auto 1fr;align-items:center}footer
 </section>
 <footer><span>© 2026 7DX Pty Ltd</span><span class="cic">COMMERCIAL IN CONFIDENCE</span><span>julian.ward@7dx.co</span></footer>
 <script>
-const SALT="dTEuNROTcYzZGdsTKviWog==",IV="dGx2N8bYkeT4S43i",ITER=310000;
+const SALT="+i4dtzXwdw6lo6Xn6fZ3Ng==",IV="59avGeSITqTBVXTd",ITER=310000;
 const b64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
 async function open(pw){
   const base=await crypto.subtle.importKey("raw",new TextEncoder().encode(pw),"PBKDF2",false,["deriveKey"]);
