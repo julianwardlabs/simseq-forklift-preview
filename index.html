@@ -63,8 +63,8 @@ footer{padding:12px 28px}
 .tc-series{display:flex;align-items:center;justify-content:center;gap:.9em}
 .tc-icons{display:inline-flex;gap:.7em;letter-spacing:0}
 .pi{height:.72em;width:auto;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round;overflow:visible}
-.tc-tag{background:linear-gradient(100deg,#8f98a3 0%,#8f98a3 36%,#ffe9a8 46%,#ffffff 50%,#ffe9a8 54%,#8f98a3 64%,#8f98a3 100%);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:glint 4.5s ease-in-out infinite;filter:drop-shadow(0 0 6px rgba(255,199,44,.25))}
-@keyframes glint{0%{background-position:100% 0}55%,100%{background-position:0 0}}
+.tc-tag{background:linear-gradient(100deg,#7d8691 0%,#7d8691 30%,#FFC72C 40%,#ffffff 50%,#FFC72C 60%,#7d8691 70%,#7d8691 100%);background-size:260% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:glint 3.5s ease-in-out infinite;filter:drop-shadow(0 0 8px rgba(255,199,44,.55)) drop-shadow(0 0 2px rgba(255,255,255,.35))}
+@keyframes glint{0%{background-position:100% 0}60%,100%{background-position:0 0}}
 @media (prefers-reduced-motion:reduce){.tc-tag{animation:none}}
 footer{display:grid;grid-template-columns:1fr auto 1fr;align-items:center}footer span:last-child{justify-self:end}
 .cic{font-family:Montserrat;font-weight:700;letter-spacing:.22em;color:#FFC72C;font-size:11px;text-align:center}
@@ -105,7 +105,7 @@ footer{display:grid;grid-template-columns:1fr auto 1fr;align-items:center}footer
 </section>
 <footer><span>© 2026 7DX</span><span class="cic">COMMERCIAL IN CONFIDENCE</span><span>julian.ward@7dx.co</span></footer>
 <script>
-const SALT="IUQaxAKn4lfaN0hDqJtSeA==",IV="eMAGZ2cdZoxsSU9e",ITER=310000;
+const SALT="HBcDlZIvvAz3O2mS4GJIog==",IV="XAz52uq57W9d6KuV",ITER=310000;
 const b64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
 async function open(pw){
   const base=await crypto.subtle.importKey("raw",new TextEncoder().encode(pw),"PBKDF2",false,["deriveKey"]);
