@@ -105,13 +105,13 @@ footer{display:grid;grid-template-columns:1fr auto 1fr;align-items:center}footer
 </section>
 <footer><span>© 2026 7DX Pty Ltd</span><span class="cic">COMMERCIAL IN CONFIDENCE</span><span>julian.ward@7dx.co</span></footer>
 <script>
-const SALT="+i4dtzXwdw6lo6Xn6fZ3Ng==",IV="59avGeSITqTBVXTd",ITER=310000;
-const b64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+const ITER=310000;
 async function open(pw){
-  const base=await crypto.subtle.importKey("raw",new TextEncoder().encode(pw),"PBKDF2",false,["deriveKey"]);
-  const key=await crypto.subtle.deriveKey({name:"PBKDF2",salt:b64(SALT),iterations:ITER,hash:"SHA-256"},base,{name:"AES-GCM",length:256},false,["decrypt"]);
-  const ct=await (await fetch("deck.bin",{cache:"no-store"})).arrayBuffer();
-  const pt=await crypto.subtle.decrypt({name:"AES-GCM",iv:b64(IV)},key,ct);
+  const buf=new Uint8Array(await (await fetch("deck.bin?t="+Date.now(),{cache:"no-store"})).arrayBuffer());
+  const salt=buf.slice(0,16),iv=buf.slice(16,28),ct=buf.slice(28);
+  const base=await crypto.subtle.importKey("raw",new TextEncoder().encode(pw.trim()),"PBKDF2",false,["deriveKey"]);
+  const key=await crypto.subtle.deriveKey({name:"PBKDF2",salt:salt,iterations:ITER,hash:"SHA-256"},base,{name:"AES-GCM",length:256},false,["decrypt"]);
+  const pt=await crypto.subtle.decrypt({name:"AES-GCM",iv:iv},key,ct);
   return new TextDecoder().decode(pt);
 }
 async function go(pw,quiet){
